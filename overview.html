@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>求是系统工程方法论 · qiushi-systems-engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+SC:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+:root{
+  --paper:#fafaf8;
+  --ink:#0a0a0a;
+  --grey-1:#f0f0ee;
+  --grey-2:#d4d4d2;
+  --grey-3:#737373;
+  --accent:#002FA7;
+  --accent-rgb:0,47,167;
+  --accent-on:#ffffff;
+  --accent-bright:#5B7BFF;
+  --text-primary:#0a0a0a;
+  --text-secondary:#525252;
+  --text-helper:#737373;
+  --text-placeholder:#a3a3a3;
+  --border-subtle:#e0e0e0;
+  --sans:"Inter","Helvetica Neue","Helvetica","Arial",system-ui,sans-serif;
+  --sans-zh:"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei UI","Microsoft YaHei",sans-serif;
+  --mono:"JetBrains Mono","SF Mono","Cascadia Code","Consolas",monospace;
+  --sidebar-w:300px;
+  --fs-base:1.1rem;
+  --fs-sm:.95rem;
+  --fs-xs:.82rem;
+  --fs-mono:.75rem;
+}
+@media(max-width:768px){
+  :root{--sidebar-w:0px;--fs-base:1.05rem;--fs-sm:.9rem;--fs-xs:.8rem;--fs-mono:.72rem}
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:var(--fs-base)}
+body{
+  font-family:var(--sans),var(--sans-zh);
+  background:var(--paper);color:var(--text-primary);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  display:flex;min-height:100vh;
+  font-size:1rem;
+}
+
+/* ── Sidebar ── */
+#sidebar{
+  position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;
+  background:var(--ink);color:#fff;
+  display:flex;flex-direction:column;
+  overflow-y:auto;z-index:100;
+  border-right:1px solid rgba(255,255,255,.08);
+  font-size:.9rem;
+}
+#sidebar .brand{
+  padding:2.8rem 2rem 1.8rem;
+  border-bottom:1px solid rgba(255,255,255,.12);
+  flex-shrink:0;
+}
+#sidebar .brand h1{
+  font-family:var(--sans),var(--sans-zh);
+  font-weight:200;font-size:1.8rem;line-height:1.3;letter-spacing:-.02em;
+  color:#fff;margin-bottom:.5rem;
+}
+#sidebar .brand .sub{
+  font-family:var(--mono);font-size:var(--fs-mono);letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);
+}
+#sidebar nav{flex:1;padding:1.4rem 0;overflow-y:auto}
+#sidebar nav .nav-group{
+  padding:.5rem 2rem .7rem;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);
+}
+#sidebar nav a{
+  display:block;padding:.55rem 2rem;
+  font-size:.92rem;color:rgba(255,255,255,.65);text-decoration:none;
+  transition:all .15s ease;
+  border-left:2px solid transparent;
+  font-weight:300;letter-spacing:.01em;
+}
+#sidebar nav a:hover{color:#fff;background:rgba(255,255,255,.04)}
+#sidebar nav a.active{
+  color:#fff;background:rgba(255,255,255,.06);
+  border-left-color:var(--accent-bright);
+}
+#sidebar .footer{
+  padding:1.4rem 2rem;
+  border-top:1px solid rgba(255,255,255,.12);
+  font-family:var(--mono);font-size:var(--fs-mono);letter-spacing:.12em;
+  color:rgba(255,255,255,.35);flex-shrink:0;line-height:1.6;
+}
+
+/* ── Mobile toggle ── */
+#menu-toggle{
+  display:none;position:fixed;top:1rem;left:1rem;z-index:200;
+  width:44px;height:44px;background:var(--ink);color:#fff;border:0;
+  cursor:pointer;align-items:center;justify-content:center;
+}
+@media(max-width:768px){
+  #sidebar{transform:translateX(-100%);transition:transform .25s ease;font-size:.95rem}
+  #sidebar.open{transform:translateX(0)}
+  #menu-toggle{display:flex}
+  body{padding-left:0}
+}
+
+@media(min-width:769px){
+  #sidebar{
+    /* desktop sidebar always visible */
+  }
+}
+
+/* ── Main content ── */
+#main{
+  margin-left:var(--sidebar-w);
+  flex:1;max-width:1040px;padding:3.5rem 4.5rem 7rem;
+}
+@media(max-width:768px){#main{margin-left:0;padding:2.5rem 1.6rem 5rem}}
+section{margin-bottom:5.5rem;scroll-margin-top:2.5rem}
+section:last-child{margin-bottom:0}
+
+/* ── Typography ── */
+h2{
+  font-family:var(--sans),var(--sans-zh);
+  font-weight:200;font-size:2.4rem;line-height:1.15;
+  letter-spacing:-.025em;margin-bottom:2rem;
+  padding-bottom:1.2rem;
+  border-bottom:2px solid var(--accent);
+}
+h3{
+  font-family:var(--sans),var(--sans-zh);
+  font-weight:400;font-size:1.5rem;line-height:1.35;
+  letter-spacing:-.015em;margin-bottom:1rem;
+  color:var(--text-primary);
+}
+h4{
+  font-family:var(--sans),var(--sans-zh);
+  font-weight:500;font-size:1.12rem;line-height:1.45;
+  letter-spacing:-.01em;margin-bottom:.5rem;
+  color:var(--text-primary);
+}
+p{font-size:1rem;line-height:1.75;color:var(--text-secondary);font-weight:300;margin-bottom:1.1rem}
+p strong{font-weight:500;color:var(--text-primary)}
+.meta{
+  font-family:var(--mono);font-size:var(--fs-mono);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1.4rem;
+}
+.callout{
+  background:var(--grey-1);border-left:3px solid var(--accent);
+  padding:1.6rem 1.8rem;margin:1.8rem 0;
+  font-size:var(--fs-sm);line-height:1.7;color:var(--text-secondary);
+  font-weight:300;
+}
+.callout strong{font-weight:500;color:var(--text-primary)}
+.tag{
+  display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;
+  padding:.3rem .8rem;margin-right:.5rem;margin-bottom:.5rem;
+  border:1px solid var(--border-subtle);color:var(--text-helper);
+}
+.tag.mao{border-color:#c41e3a;color:#c41e3a}
+.tag.tsien{border-color:var(--accent);color:var(--accent)}
+
+/* ── Cards ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:1.6rem;margin:1.8rem 0}
+@media(max-width:600px){.card-grid{grid-template-columns:1fr}}
+.card{
+  background:var(--grey-1);padding:1.8rem;display:flex;flex-direction:column;gap:.9rem;
+  border-top:3px solid var(--accent);
+}
+.card.mao-card{border-top-color:#c41e3a}
+.card .card-name{
+  font-family:var(--mono);font-weight:500;font-size:1rem;color:var(--text-primary);
+  letter-spacing:-.01em;word-break:break-all;
+}
+.card .card-desc{
+  font-size:var(--fs-sm);line-height:1.6;color:var(--text-secondary);font-weight:300;
+  flex:1;
+}
+.card .card-source{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;
+  color:var(--text-helper);margin-top:auto;
+}
+.card .card-trigger{
+  font-size:var(--fs-xs);line-height:1.5;color:var(--text-helper);font-weight:300;
+  padding-top:.8rem;border-top:1px solid var(--border-subtle);
+}
+.card .card-trigger::before{content:"触发：";font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+
+/* ── Ring section ── */
+.ring-section{margin-bottom:3.5rem}
+.ring-section>p{font-size:var(--fs-sm);color:var(--text-helper)}
+.ring-section h3{
+  display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;
+  margin-bottom:1.4rem;padding-bottom:.8rem;
+  border-bottom:1px solid var(--border-subtle);
+}
+.ring-badge{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;
+  padding:.3rem .8rem;background:var(--accent);color:var(--accent-on);
+  white-space:nowrap;
+}
+
+/* ── Architecture viz ── */
+.arch-viz{
+  display:grid;grid-template-columns:repeat(7,1fr);gap:.8rem;
+  margin:2.2rem 0;text-align:center;
+}
+.arch-viz .ring-node{
+  padding:1.4rem .8rem;background:var(--grey-1);
+  font-size:.9rem;font-weight:500;line-height:1.35;
+}
+.arch-viz .ring-node.accent{background:var(--accent);color:var(--accent-on)}
+.arch-viz .ring-node .en{font-family:var(--mono);font-size:.65rem;letter-spacing:.08em;margin-bottom:.4rem;opacity:.7}
+.arch-viz .ring-node .cn{font-weight:600;font-size:1rem}
+.arch-viz .ring-node .count{font-size:.7rem;margin-top:.5rem;opacity:.6}
+@media(max-width:900px){.arch-viz{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:500px){.arch-viz{grid-template-columns:repeat(2,1fr)}}
+
+/* ── Version timeline ── */
+.ver-timeline{display:flex;flex-direction:column;gap:1.4rem;margin:1.8rem 0}
+.ver-item{display:grid;grid-template-columns:90px 1fr;gap:1.4rem;align-items:start}
+.ver-item .ver-tag{
+  font-family:var(--mono);font-weight:600;font-size:.85rem;
+  padding:.4rem .9rem;background:var(--ink);color:#fff;text-align:center;
+}
+.ver-item p{font-size:var(--fs-sm);margin:0;align-self:center}
+
+/* ── Misc ── */
+hr{border:0;border-top:1px solid var(--border-subtle);margin:2.2rem 0}
+ul{padding-left:1.6rem;margin:.8rem 0 1.4rem}
+ul li{font-size:var(--fs-sm);line-height:1.75;color:var(--text-secondary);font-weight:300;margin-bottom:.4rem}
+ul li strong{font-weight:500}
+.rule{width:100%;height:1px;background:var(--border-subtle);margin:1.6rem 0}
+.goto-top{
+  display:inline-block;margin-top:3rem;
+  font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;
+  color:var(--text-helper);text-decoration:none;
+  transition:color .15s;
+}
+.goto-top:hover{color:var(--accent)}
+
+/* ── Responsive typography ── */
+@media(max-width:768px){
+  h2{font-size:1.8rem}
+  h3{font-size:1.3rem}
+  h4{font-size:1.05rem}
+  p{font-size:.95rem}
+  .card .card-name{font-size:.92rem}
+  .card .card-desc{font-size:.88rem}
+  .card .card-trigger{font-size:.8rem}
+  .card .card-source{font-size:.7rem}
+  .ring-badge{font-size:.68rem}
+}
+
+/* ── Large screen ── */
+@media(min-width:1400px){
+  #main{max-width:1100px;padding:4rem 5rem 8rem}
+  h2{font-size:2.8rem}
+  .card-grid{grid-template-columns:repeat(auto-fill,minmax(440px,1fr))}
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════ SIDEBAR ════════════════ -->
+<button id="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">
+  <i data-lucide="menu" style="width:20px;height:20px"></i>
+</button>
+
+<aside id="sidebar">
+  <div class="brand">
+    <h1>求是系统工程方法论</h1>
+    <div class="sub">qiushi-systems-engineering v3.1</div>
+  </div>
+  <nav>
+    <div class="nav-group">概览</div>
+    <a href="#overview">项目概述</a>
+    <a href="#philosophy">哲学根基</a>
+    <a href="#architecture">认知环架构</a>
+    <a href="#design">设计原则</a>
+    <a href="#v31">v3.1 系统层次</a>
+    <a href="#versions">版本历史</a>
+    <div class="nav-group" style="margin-top:.8rem">技能体系</div>
+    <a href="#ring-perceive">感知 · Perceive（4）</a>
+    <a href="#ring-understand">理解 · Understand（3）</a>
+    <a href="#ring-model">建模 · Model（4）</a>
+    <a href="#ring-solve">求解 · Solve（5）</a>
+    <a href="#ring-execute">执行 · Execute（5）</a>
+    <a href="#ring-verify">校验 · Verify（3）</a>
+    <a href="#ring-correct">修正 · Correct（2）</a>
+    <a href="#ring-meta">元能力 · Meta（2）</a>
+  </nav>
+  <div class="footer">基于钱学森《工程控制论》《论系统工程》<br/>毛泽东《实践论》《矛盾论》</div>
+</aside>
+
+<!-- ════════════════ MAIN ════════════════ -->
+<main id="main">
+
+<!-- ── 项目概述 ── -->
+<section id="overview">
+  <h2>项目概述</h2>
+  <p class="meta">实事求是 + 系统工程 + 工程控制论 → AI Agent 方法论工具链</p>
+  <p><strong>qiushi-systems-engineering</strong> 是一套为 AI Agent 设计的方法论 skill 集合。<strong>28 个 skill</strong> 覆盖 agent 认知闭环的七个环节，使 agent 在面对复杂任务时能够：摸清现状再判断、抓住本质和主要矛盾、建立系统模型、在约束下求最优解、有序推进不散乱、验证偏差不盲信、根据反馈自校正。</p>
+  <div class="callout">
+    <strong>核心洞察：</strong>AI 模型能力的增强掩盖了方法论的匮乏。Agent 在复杂任务中反复试错，缺乏系统性的判断框架。本体系提供的不是"告诉 Agent 做什么"，而是"教 Agent 如何思考"——一套从感知到修正的结构化认知流水线。
+  </div>
+  <p>体系的组织逻辑不是「毛泽东的方法 vs 钱学森的方法」，而是<strong>按 agent 的实际认知流程组织</strong>。在每个认知环节下，毛泽东的哲学方法论和钱学森的工程方法论协同工作、互补而非互斥。</p>
+</section>
+
+<!-- ── 哲学根基 ── -->
+<section id="philosophy">
+  <h2>哲学根基</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin:1.8rem 0">
+    <div class="card mao-card">
+      <div class="card-name">毛泽东哲学方法论</div>
+      <div class="card-desc">《实践论》《矛盾论》提供认识论根基：<strong>实事求是、调查研究、矛盾分析、实践检验</strong>。教 Agent 如何接近真理——不是从教条出发，而是从事实出发。</div>
+      <div class="card-source">《实践论》1937 · 《矛盾论》1937 · 《改造我们的学习》1941</div>
+    </div>
+    <div class="card">
+      <div class="card-name">钱学森系统工程方法论</div>
+      <div class="card-desc">《工程控制论》《论系统工程》提供工程方法：<strong>系统思维、最优控制、状态估计、反馈修正</strong>。教 Agent 如何系统地解决问题——不靠枚举，靠结构化的最优性条件。</div>
+      <div class="card-source">《工程控制论》1954/1980 · 《论系统工程》1982</div>
+    </div>
+  </div>
+  <p style="text-align:center;font-weight:300;font-size:1.1rem;margin-top:1.4rem">
+    两者汇聚为一条总原则——<strong style="font-weight:500">实事求是：先看事实，再下判断。</strong>
+  </p>
+</section>
+
+<!-- ── 认知环架构 ── -->
+<section id="architecture">
+  <h2>认知环架构</h2>
+  <p class="meta">Seven-Ring Cognitive Loop</p>
+  <p>28 个 skill 按 agent 的认知闭环组织为七个环节，从感知到修正形成完整的决策流水线。</p>
+  <div class="arch-viz">
+    <div class="ring-node"><div class="en">PERCEIVE</div><div class="cn">感知</div><div class="count">4 tools</div></div>
+    <div class="ring-node"><div class="en">UNDERSTAND</div><div class="cn">理解</div><div class="count">3 tools</div></div>
+    <div class="ring-node"><div class="en">MODEL</div><div class="cn">建模</div><div class="count">4 tools</div></div>
+    <div class="ring-node"><div class="en">SOLVE</div><div class="cn">求解</div><div class="count">5 tools</div></div>
+    <div class="ring-node"><div class="en">EXECUTE</div><div class="cn">执行</div><div class="count">5 tools</div></div>
+    <div class="ring-node"><div class="en">VERIFY</div><div class="cn">校验</div><div class="count">3 tools</div></div>
+    <div class="ring-node accent"><div class="en">CORRECT</div><div class="cn">修正</div><div class="count">2 tools</div></div>
+  </div>
+  <p style="text-align:center;font-size:.85rem;color:var(--text-helper);margin-top:.8rem">箭头方向：感知→理解→建模→求解→执行→校验→修正→（回环至感知）</p>
+  <div class="callout">
+    <strong>状态机机制：</strong>每个环节有明确的出口条件。偏差发生后，根据偏差层次自动回退到对应环节（执行偏差→执行环、建模偏差→建模环、理解偏差→理解环、感知偏差→重新调查）。连续两轮经过同一环节无新信息则宣告停滞。
+  </div>
+</section>
+
+<!-- ── 设计原则 ── -->
+<section id="design">
+  <h2>设计原则</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem;margin:1.6rem 0">
+    <div class="card"><div class="card-name">01 · 认知环组织</div><div class="card-desc">按 agent 的实际认知流程组织技能，而非按思想来源分类。毛泽东方法和钱学森方法在同一认知环节下互补。</div></div>
+    <div class="card"><div class="card-name">02 · 双源协同</div><div class="card-desc">毛泽东哲学和钱学森工程不是两个流派，而是同一认知目标下的两套互补方法。每个环节都可调用双方工具。</div></div>
+    <div class="card"><div class="card-name">03 · 分层不割裂</div><div class="card-desc">每个技能独立可用，也可以完整串联。不强制走全环——简单任务只走感知+执行，复杂任务全环展开。</div></div>
+    <div class="card"><div class="card-name">04 · 原著为锚</div><div class="card-desc">每个 skill 标明在原著中的具体出处（章节号或文章名），确保方法论根基可追溯、可验证。</div></div>
+    <div class="card"><div class="card-name">05 · 操作化输出</div><div class="card-desc">每个 skill 包含明确的步骤、触发条件、不适用场景和常见错误。不是哲学散文，是可执行的规程。</div></div>
+    <div class="card" style="border-top-color:var(--accent)"><div class="card-name">06 · 承认不知道</div><div class="card-desc">不确定时返回调查，不用猜测填补。宁可说"这个需要查"也不给出没有依据的结论。</div></div>
+    <div class="card" style="border-top-color:var(--accent)"><div class="card-name">07 · 反模板化</div><div class="card-desc">在套用任何已有方案前，先列出当前情境与过往案例的实质性差异。直接复用旧方案而不检查前提是否成立，是框架禁止的。</div></div>
+  </div>
+</section>
+
+<!-- ── v3.1 系统层次 ── -->
+<section id="v31">
+  <h2>v3.1 · 系统层次意识</h2>
+  <p class="meta">防止"把产品当物理系统优化"类层次错位</p>
+  <p>v3.1 的核心升级：在对系统建模之前，先锚定系统在哪个层次上被讨论。同一对象在不同层次上，目标函数不同、约束集不同、最优解不同。</p>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1.8rem 0">
+    <div class="card"><div class="card-name">物理系统</div><div class="card-desc">由自然定律封闭。目标来自内部物理量（效率、比冲、功率密度）。约束为守恒定律和材料本征极限。</div></div>
+    <div class="card"><div class="card-name">工程系统</div><div class="card-desc">物理系统 + 制造/装配/维护可行性。目标为性能-可制造性权衡。约束增加工艺极限、供应链、公差。</div></div>
+    <div class="card" style="border-top-color:var(--accent)"><div class="card-name">产品系统</div><div class="card-desc">工程系统 + 使用场景 + 生命周期。目标由使用场景赋予（$/kg to orbit）。约束增加用户需求和经济可行性。</div></div>
+    <div class="card" style="border-top-color:var(--ink)"><div class="card-name">社会-技术系统</div><div class="card-desc">产品系统 + 组织/市场/制度。目标为长期存续与演化能力。约束增加产业生态、法规、资本效率。</div></div>
+  </div>
+  <p><strong>升级涉及 7 个关键节点：</strong>网关判据（arming-thought）、系统思维框架第零步（systems-thinking-framework）、约束分类（first-principles-analysis）、边界六维检查（system-boundary-structuring）、目标函数层次校验（constrained-optimization）、输入层次标注（meta-synthesis-engine）、场景层根因（feedback-and-revision-loop）。</p>
+</section>
+
+<!-- ── 版本历史 ── -->
+<section id="versions">
+  <h2>版本历史</h2>
+  <div class="ver-timeline">
+    <div class="ver-item"><div class="ver-tag">v1.0</div><p>初始版本，11 个 qiushi 技能，以毛泽东方法论为主体。</p></div>
+    <div class="ver-item"><div class="ver-tag">v2.0</div><p>新增系统工程层和工程控制论层，扩展至 24 个技能。引入钱学森方法论。</p></div>
+    <div class="ver-item"><div class="ver-tag">v2.1</div><p>新增最优决策、状态估计、自适应策略，27 个技能。</p></div>
+    <div class="ver-item"><div class="ver-tag">v3.0</div><p>重构为认知环架构，以 agent 认知闭环替代来源分层。认知环七环节正式确立。</p></div>
+    <div class="ver-item"><div class="ver-tag" style="background:var(--accent)">v3.1</div><p>引入系统层次意识（物理/工程/产品/社会-技术），在网关判据、系统思维框架、第一性分析、边界结构、约束优化、综合集成、反馈修正等七个关键节点增加层次锚定与校验机制。</p></div>
+  </div>
+</section>
+
+<!-- ════════════════ SKILLS ════════════════ -->
+<section>
+  <h2>技能体系 · 28 Skills</h2>
+  <p class="meta">按七环认知闭环组织 · 每环标注毛/钱来源</p>
+</section>
+
+<!-- 感知环 -->
+<section id="ring-perceive" class="ring-section">
+  <h3><span class="ring-badge">PERCEIVE</span> 感知 · 我面对的是什么？</h3>
+  <p>摸清现状、收集事实、从噪声中推断隐藏状态。先调查再发言。</p>
+  <div class="card-grid">
+    <div class="card mao-card">
+      <div class="card-name">investigation-first · 调查研究</div>
+      <div class="card-desc">先调查再发言，列提纲逐项摸清。定义观测框架：看什么、问谁、怎么验证。信息不充分时严禁下判断。</div>
+      <div class="card-source">毛泽东《反对本本主义》</div>
+      <div class="card-trigger">信息缺口、证据不足、领域陌生、需要先摸清现状</div>
+    </div>
+    <div class="card">
+      <div class="card-name">problem-domain-investigation · 问题域调研</div>
+      <div class="card-desc">进入陌生领域前的系统性调研。建立知识地图，评估信息来源可靠性，区分已知/未知/推测。</div>
+      <div class="card-source">钱学森《论系统工程》第25章</div>
+      <div class="card-trigger">领域知识不足、信息缺口明显、需区分已知未知推测</div>
+    </div>
+    <div class="card mao-card">
+      <div class="card-name">mass-line · 群众路线</div>
+      <div class="card-desc">收集→集中→返回→检验。整合多方意见，从分散的个体反馈中凝聚为系统判断。</div>
+      <div class="card-source">毛泽东《关于领导方法的若干问题》</div>
+      <div class="card-trigger">多方意见、stakeholder 反馈、需要收集-综合-验证循环</div>
+    </div>
+    <div class="card">
+      <div class="card-name">state-estimation · 状态估计</div>
+      <div class="card-desc">从噪声、矛盾、残缺数据中递推推断隐藏状态。维纳滤波、卡尔曼滤波——在信息残缺条件下推测真实情况。</div>
+      <div class="card-source">钱学森、宋健《工程控制论》第14-15章</div>
+      <div class="card-trigger">数据噪声大、信息源矛盾、需在线递推更新认知</div>
+    </div>
+  </div>
+</section>
+
+<!-- 理解环 -->
+<section id="ring-understand" class="ring-section">
+  <h3><span class="ring-badge">UNDERSTAND</span> 理解 · 本质是什么？主要矛盾在哪？</h3>
+  <p>剥离假设到不可再分的基本元素，追溯系统演化路径，识别核心张力。</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">first-principles-analysis · 第一性原理分析</div>
+      <div class="card-desc">剥离所有假设到不可再分的基本元素，再从基本元素向上重建理解。区分物理约束、场景约束、经济约束、工程惯例和历史遗留。</div>
+      <div class="card-source">亚里士多德/笛卡尔/钱学森《工程控制论》第1章</div>
+      <div class="card-trigger">全新问题、框架无法套用、假设堆积需打散重建</div>
+    </div>
+    <div class="card">
+      <div class="card-name">historical-evolution-analysis · 历史演化分析</div>
+      <div class="card-desc">追溯因果链→识别路径依赖→分离偶然遗留与结构必然。理解系统"为什么是现在这个样子"。</div>
+      <div class="card-source">钱学森《论系统工程》《工程控制论》</div>
+      <div class="card-trigger">理解旧系统、重构前需理解演化路径、区分历史惯性与结构必要</div>
+    </div>
+    <div class="card mao-card">
+      <div class="card-name">contradiction-analysis · 矛盾分析</div>
+      <div class="card-desc">识别矛盾→判定主要矛盾→区分对抗性/非对抗性→确定主攻方向。主要矛盾 = 约束瓶颈 = 优先攻克的目标。</div>
+      <div class="card-source">毛泽东《矛盾论》</div>
+      <div class="card-trigger">问题复杂、多因素冲突、优先级不清、根因不明</div>
+    </div>
+  </div>
+</section>
+
+<!-- 建模环 -->
+<section id="ring-model" class="ring-section">
+  <h3><span class="ring-badge">MODEL</span> 建模 · 怎么描述这个系统？</h3>
+  <p>建立系统世界观，定义边界、组分、层次、涌现和反馈。从定性认识跃迁到可计算模型。</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">systems-thinking-framework · 系统思维框架</div>
+      <div class="card-desc">第零步确定系统层次（物理/工程/产品/社会-技术），然后六步建立系统世界观：目的→边界→组分→层次→涌现→反馈。</div>
+      <div class="card-source">钱学森《论系统工程》</div>
+      <div class="card-trigger">多子系统、目标模糊、需整体把握再分解</div>
+    </div>
+    <div class="card">
+      <div class="card-name">system-boundary-structuring · 系统边界结构</div>
+      <div class="card-desc">层次分解→组分规格→接口契约→六维边界检查（物理/逻辑/时间/组织/知识/场景）。</div>
+      <div class="card-source">钱学森《论系统工程》第37章</div>
+      <div class="card-trigger">组分超过5个、多层级嵌套、接口关系复杂</div>
+    </div>
+    <div class="card">
+      <div class="card-name">quantitative-modeling-workflow · 定量建模</div>
+      <div class="card-desc">从经验性假设和定性描述出发，识别变量→选择建模方法→构建可计算模型。定性假设→定量模型。</div>
+      <div class="card-source">钱学森《论系统工程》第1、2、8章</div>
+      <div class="card-trigger">需将系统转化为数学模型、需优化或预测</div>
+    </div>
+    <div class="card">
+      <div class="card-name">meta-synthesis-engine · 综合集成引擎</div>
+      <div class="card-desc">定性判断 + 定量结果 + 经验 → 统一结论。标注每个输入来源的系统层次，处理跨层次冲突（层面错位≠真分歧）。</div>
+      <div class="card-source">钱学森《论系统工程》增订版</div>
+      <div class="card-trigger">多来源矛盾、定性定量需统一、需升华整体判断</div>
+    </div>
+  </div>
+</section>
+
+<!-- 求解环 -->
+<section id="ring-solve" class="ring-section">
+  <h3><span class="ring-badge">SOLVE</span> 求解 · 在约束下，最优方案是什么？</h3>
+  <p>目标清晰后，在约束空间内寻找最优策略。受控系统的最优控制通常触碰约束边界而非停留在内部。</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">constrained-optimization · 约束优化</div>
+      <div class="card-desc">先校验目标函数层次（产品系统不能用物理层指标），再用庞特里亚金极大值原理或贝尔曼动态规划求解。最优解通常触碰约束边界。</div>
+      <div class="card-source">钱学森、宋健《工程控制论》第8-9章</div>
+      <div class="card-trigger">需选最优方案、资源有限、在约束下最大化指标</div>
+    </div>
+    <div class="card">
+      <div class="card-name">hierarchical-decomposition-coordination · 递阶分解协调</div>
+      <div class="card-desc">将大系统分解为自治子系统，加协调层防止局部优化导致全局恶化。分散化控制——子系统自治，协调器只处理耦合。</div>
+      <div class="card-source">钱学森、宋健《工程控制论》第21章</div>
+      <div class="card-trigger">多子系统互扰、局部优化恶化全局、需分而治之</div>
+    </div>
+    <div class="card">
+      <div class="card-name">duality-complementarity-analysis · 对偶互补分析</div>
+      <div class="card-desc">正向推导不通→构造对偶问题→在对偶空间求解→翻译回原空间。状态↔协态、能控↔能观测、原系统↔伴随系统。</div>
+      <div class="card-source">钱学森、宋健《工程控制论》第4/8/13章</div>
+      <div class="card-trigger">正向路径受阻、问题有对称结构、"正难则反"</div>
+    </div>
+    <div class="card">
+      <div class="card-name">perturbation-progressive-method · 摄动渐进</div>
+      <div class="card-desc">先解标称（简化）问题→将差异视为小摄动→一阶校正→评估摄动假设何时失效→逐步加回复杂因素。</div>
+      <div class="card-source">钱学森、宋健《工程控制论》第13章</div>
+      <div class="card-trigger">精确求解不可行、需从简单情形逐步逼近</div>
+    </div>
+    <div class="card">
+      <div class="card-name">multi-representation-equivalence-transform · 多表述等价变换</div>
+      <div class="card-desc">在一种数学工具下卡住时，切换到等价表述。时域↔频域↔状态空间↔几何↔希尔伯特空间。选择使核心操作最简单的表述。</div>
+      <div class="card-source">钱学森、宋健《工程控制论》第2章</div>
+      <div class="card-trigger">同一方向反复无果、需切换数学视角</div>
+    </div>
+  </div>
+</section>
+
+<!-- 执行环 -->
+<section id="ring-execute" class="ring-section">
+  <h3><span class="ring-badge">EXECUTE</span> 执行 · 怎么落地？</h3>
+  <p>将方案编排为有依赖关系的任务序列，确定主攻方向，集中兵力逐一歼灭。</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">engineering-orchestration · 工程编排</div>
+      <div class="card-desc">WBS→关键路径→质量门→风险矩阵，将方案编排为有依赖关系和里程碑的可执行任务序列。</div>
+      <div class="card-source">钱学森《论系统工程》</div>
+      <div class="card-trigger">需制定开发计划、任务过多需编排调度</div>
+    </div>
+    <div class="card mao-card">
+      <div class="card-name">concentrate-forces · 集中兵力</div>
+      <div class="card-desc">多任务中确定唯一主攻方向，停止分散用力。在每个阶段只有一个中心目标，其他都绕着它转。</div>
+      <div class="card-source">毛泽东十大军事原则</div>
+      <div class="card-trigger">优先级过多、资源紧张、推进分散</div>
+    </div>
+    <div class="card mao-card">
+      <div class="card-name">spark-prairie-fire · 星火燎原</div>
+      <div class="card-desc">从零起步，找最小可行切入点建立根据地。先验证核心假设，再从验证过的核心向外扩展。</div>
+      <div class="card-source">毛泽东《星星之火，可以燎原》</div>
+      <div class="card-trigger">资源极少、需 bootstrap/MVP/pilot</div>
+    </div>
+    <div class="card mao-card">
+      <div class="card-name">protracted-strategy · 持久战略</div>
+      <div class="card-desc">长期复杂任务分三阶段：防御（站稳脚跟）→相持（积累力量）→反攻（实现突破）。不追求速胜，保持战略耐心。</div>
+      <div class="card-source">毛泽东《论持久战》</div>
+      <div class="card-trigger">目标长期、短期无法速胜但不可放弃</div>
+    </div>
+    <div class="card mao-card">
+      <div class="card-name">overall-planning · 统筹兼顾</div>
+      <div class="card-desc">多个目标相互制约时做动态平衡。不是单目标最优，而是十个指头弹钢琴——各有轻重缓急但都在动。</div>
+      <div class="card-source">毛泽东《论十大关系》</div>
+      <div class="card-trigger">多目标冲突、优化一项伤害另一项</div>
+    </div>
+  </div>
+</section>
+
+<!-- 校验环 -->
+<section id="ring-verify" class="ring-section">
+  <h3><span class="ring-badge">VERIFY</span> 校验 · 做得对吗？</h3>
+  <p>结果与预期比对，偏差量化，根因追溯。真理的标准只能是社会实践。</p>
+  <div class="card-grid">
+    <div class="card mao-card">
+      <div class="card-name">practice-cognition · 实践认识论</div>
+      <div class="card-desc">实践→认识→再实践的螺旋上升。感性认识（积累材料）→理性认识（提炼规律）→实践验证→总结升华。全环节的方法论约束。</div>
+      <div class="card-source">毛泽东《实践论》</div>
+      <div class="card-trigger">方案需验证、假设需检验、需迭代升级认知</div>
+    </div>
+    <div class="card">
+      <div class="card-name">simulation-validation-cycle · 仿真验证</div>
+      <div class="card-desc">多场景仿真 + 边界条件测试 + 压力测试。在实际执行前通过仿真发现模型的薄弱环节和失效条件。</div>
+      <div class="card-source">钱学森《论系统工程》第43章</div>
+      <div class="card-trigger">模型已建立、需在多种场景下测试</div>
+    </div>
+    <div class="card">
+      <div class="card-name">feedback-and-revision-loop · 反馈修正循环</div>
+      <div class="card-desc">阶段偏差量化→五层根因追溯（哲学/理论/场景/方法/执行）→三级修正（短期止血/中期治本/长期免疫）→认知更新。</div>
+      <div class="card-source">钱学森《论系统工程》</div>
+      <div class="card-trigger">阶段完成需审查、执行结果与预期不符</div>
+    </div>
+  </div>
+</section>
+
+<!-- 修正环 -->
+<section id="ring-correct" class="ring-section">
+  <h3><span class="ring-badge">CORRECT</span> 修正 · 怎么改？</h3>
+  <p>基于偏差的层次决定回退到认知环的哪个环节。修正不是惩罚，是方法论自愈。</p>
+  <div class="card-grid">
+    <div class="card mao-card">
+      <div class="card-name">criticism-self-criticism · 批评与自我批评</div>
+      <div class="card-desc">结构化审视工作质量和思维过程。具体行为归因→根本原因→改进建议。目的不是追责而是"治病救人"。人维度的反思。</div>
+      <div class="card-source">毛泽东《整顿党的作风》《论联合政府》</div>
+      <div class="card-trigger">工作完成需审视、收到反馈、反复出错需纠偏</div>
+    </div>
+    <div class="card">
+      <div class="card-name">adaptive-robust-strategy · 自适应策略</div>
+      <div class="card-desc">自寻优→自行镇定→模型参考自适应。在环境参数不可预知变化时，系统自动保持最优。系统维度的自校正。</div>
+      <div class="card-source">钱学森、宋健《工程控制论》第16/18章</div>
+      <div class="card-trigger">环境变化不可预知、运行中性能下降需自校准</div>
+    </div>
+  </div>
+</section>
+
+<!-- 元能力 -->
+<section id="ring-meta" class="ring-section">
+  <h3><span class="ring-badge">META</span> 元能力 · 总原则与工作流</h3>
+  <div class="card-grid">
+    <div class="card ming">
+      <div class="card-name">arming-thought · 武装思想</div>
+      <div class="card-desc">实事求是总原则 + 认知环路由器。在每次顶层对话开始时自动加载。包含六级深度判据（确定展开哪些认知环）和系统层次定位（物理/工程/产品/社会-技术）。</div>
+      <div class="card-source">毛泽东 + 钱学森 方法论的统一入口</div>
+      <div class="card-trigger">每次新的顶层对话开始时自动调用</div>
+    </div>
+    <div class="card">
+      <div class="card-name">workflows · 标准化工作流</div>
+      <div class="card-desc">三条标准化跨环节工作流：① 新项目启动（感知→理解→建模→求解→执行）② 复杂问题攻坚（感知→理解→求解→校验→修正循环）③ 方案迭代优化（执行→校验→修正→建模→求解循环）。</div>
+      <div class="card-source">技能体系的编排层</div>
+      <div class="card-trigger">任务需跨环节串联多个 skill</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 偏差回退机制 ── -->
+<section>
+  <h2>偏差回退机制</h2>
+  <p>当校验环发现偏差后，根据偏差的层次决定回退到认知环的哪个位置：</p>
+  <div style="margin:1.6rem 0">
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:.6rem 1.4rem;font-size:.9rem">
+      <div style="font-weight:500;padding:.6rem;background:var(--grey-1)">执行偏差</div><div style="padding:.6rem;color:var(--text-secondary);font-weight:300">计划没错，执行不到位 → 回到<strong>执行环</strong>，调整资源或节奏</div>
+      <div style="font-weight:500;padding:.6rem;background:var(--grey-1)">求解偏差</div><div style="padding:.6rem;color:var(--text-secondary);font-weight:300">最优解在模型内对但在现实中错 → 回到<strong>求解环</strong>，检查约束是否遗漏</div>
+      <div style="font-weight:500;padding:.6rem;background:var(--grey-1)">建模偏差</div><div style="padding:.6rem;color:var(--text-secondary);font-weight:300">模型本身不能反映现实 → 回到<strong>建模环</strong>，修正系统描述</div>
+      <div style="font-weight:500;padding:.6rem;background:var(--grey-1)">场景偏差</div><div style="padding:.6rem;color:var(--text-secondary);font-weight:300">错误源于在错误的系统层次上定义问题 → 回到<strong>系统思维框架第零步</strong>，重新锚定层次</div>
+      <div style="font-weight:500;padding:.6rem;background:var(--grey-1)">理解偏差</div><div style="padding:.6rem;color:var(--text-secondary);font-weight:300">本质或主要矛盾判断错误 → 回到<strong>理解环</strong>，重新做第一性分析</div>
+      <div style="font-weight:500;padding:.6rem;background:var(--grey-1)">感知偏差</div><div style="padding:.6rem;color:var(--text-secondary);font-weight:300">根本不知道自己在面对什么 → 回到<strong>感知环</strong>，重新调查</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 自指性 ── -->
+<section>
+  <h2>自指性：方法论的终极检验</h2>
+  <p class="meta">Self-Reference</p>
+  <p>qiushi 框架最独特的特征：<strong>它可以检验和升级自己。</strong>当框架本身产出错误时，自身的校验-修正链路能够定位根因，并推动框架的结构性迭代。</p>
+  <div class="callout">
+    <strong>典型案例：</strong>在讨论液体火箭发动机优化时，框架按纯物理系统给出了最大化比冲的解。用户指出"发动机是一件产品"——这暴露了框架缺少"系统层次意识"的结构性缺陷。随后的复盘用框架自身的 criticism-self-criticism 定位了根因，用 feedback-and-revision-loop 追溯了七个关键节点的缺失，最终推动了 v3.1 的升级。<br/><br/>
+    <strong>实践→认识→再实践→再认识——这个螺旋不仅适用于框架分析的对象，也适用于框架自身。</strong>
+  </div>
+</section>
+
+<!-- ── 统计 ── -->
+<section>
+  <h2>数据概览</h2>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin:1.6rem 0">
+    <div class="card" style="text-align:center;padding:2rem 1rem"><div style="font-family:var(--sans);font-weight:800;font-size:3.2rem;line-height:1;color:var(--accent)">28</div><div style="font-size:.85rem;color:var(--text-helper);margin-top:.4rem">方法论技能</div></div>
+    <div class="card" style="text-align:center;padding:2rem 1rem"><div style="font-family:var(--sans);font-weight:800;font-size:3.2rem;line-height:1;color:var(--accent)">7</div><div style="font-size:.85rem;color:var(--text-helper);margin-top:.4rem">认知环节</div></div>
+    <div class="card" style="text-align:center;padding:2rem 1rem"><div style="font-family:var(--sans);font-weight:800;font-size:3.2rem;line-height:1;color:var(--accent)">2</div><div style="font-size:.85rem;color:var(--text-helper);margin-top:.4rem">思想源头</div></div>
+    <div class="card" style="text-align:center;padding:2rem 1rem"><div style="font-family:var(--sans);font-weight:800;font-size:3.2rem;line-height:1;color:var(--accent)">5</div><div style="font-size:.85rem;color:var(--text-helper);margin-top:.4rem">迭代版本</div></div>
+  </div>
+</section>
+
+<a href="#" class="goto-top">↑ 回到顶部</a>
+
+</main>
+
+<script>
+lucide.createIcons();
+// Active nav highlighting
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#sidebar nav a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      navLinks.forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`#sidebar nav a[href="#${entry.target.id}"]`);
+      if(link) link.classList.add('active');
+    }
+  });
+}, {rootMargin:'-20% 0px -60% 0px'});
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
