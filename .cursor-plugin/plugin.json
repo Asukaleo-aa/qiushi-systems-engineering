@@ -1,4 +1,50 @@
 {
   "name": "qiushi-systems-engineering",
-  "description": "Qiushi Systems Engineering: 27 AI Agent methodological skills combining Mao Zedong philosophy and Qian Xuesen systems engineering, structured as a 7-phase cognitive ring."
+  "version": "3.2.0",
+  "description": "求是系统工程方法论：28 个 AI Agent 方法论 Skill，基于毛泽东哲学方法论与钱学森系统工程论，组织为七环认知闭环。每次会话启动自动注入实事求是总原则与认知环路由器。",
+  "author": "Asukaleo-aa",
+  "homepage": "https://github.com/Asukaleo-aa/qiushi-systems-engineering",
+  "license": "MIT",
+
+  "hooks": {
+    "SessionStart": {
+      "command": "\"${CURSOR_PLUGIN_ROOT}/hooks/session-start\"",
+      "when": "always"
+    }
+  },
+
+  "commands": [
+    { "name": "arming-thought", "description": "武装思想：实事求是总原则 + 认知环路由器", "file": "commands/arming-thought.md" },
+    { "name": "investigation-first", "description": "调查研究：先调查再发言", "file": "commands/investigation-first.md" },
+    { "name": "state-estimation", "description": "状态估计：从噪声推断隐藏状态", "file": "commands/state-estimation.md" },
+    { "name": "mass-line", "description": "群众路线：收集→集中→返回→检验", "file": "commands/mass-line.md" },
+    { "name": "contradiction-analysis", "description": "矛盾分析：识别矛盾→判定主次→主攻方向", "file": "commands/contradiction-analysis.md" },
+    { "name": "first-principles-analysis", "description": "第一性原理：剥离假设到不可再分", "file": "commands/first-principles-analysis.md" },
+    { "name": "historical-evolution-analysis", "description": "历史演化：追溯因果链理解现状", "file": "commands/historical-evolution-analysis.md" },
+    { "name": "systems-thinking-framework", "description": "系统思维：六步建立系统世界观", "file": "commands/systems-thinking-framework.md" },
+    { "name": "system-boundary-structuring", "description": "边界结构：层次分解+接口契约", "file": "commands/system-boundary-structuring.md" },
+    { "name": "quantitative-modeling-workflow", "description": "定量建模：定性→定量跃迁", "file": "commands/quantitative-modeling-workflow.md" },
+    { "name": "meta-synthesis-engine", "description": "综合集成：统一判断", "file": "commands/meta-synthesis-engine.md" },
+    { "name": "constrained-optimization", "description": "约束优化：约束下最优决策", "file": "commands/constrained-optimization.md" },
+    { "name": "hierarchical-decomposition-coordination", "description": "递阶分解：大系统自治+协调", "file": "commands/hierarchical-decomposition-coordination.md" },
+    { "name": "duality-complementarity-analysis", "description": "对偶分析：正向不通→构造对偶", "file": "commands/duality-complementarity-analysis.md" },
+    { "name": "perturbation-progressive-method", "description": "摄动渐进：逐步逼近精确解", "file": "commands/perturbation-progressive-method.md" },
+    { "name": "multi-representation-equivalence-transform", "description": "表述变换：时域↔频域切换", "file": "commands/multi-representation-equivalence-transform.md" },
+    { "name": "engineering-orchestration", "description": "工程编排：WBS+关键路径+质量门", "file": "commands/engineering-orchestration.md" },
+    { "name": "concentrate-forces", "description": "集中兵力：确定主攻方向", "file": "commands/concentrate-forces.md" },
+    { "name": "spark-prairie-fire", "description": "星火燎原：最小可行切入点", "file": "commands/spark-prairie-fire.md" },
+    { "name": "protracted-strategy", "description": "持久战略：防御→相持→反攻", "file": "commands/protracted-strategy.md" },
+    { "name": "overall-planning", "description": "统筹兼顾：多目标动态平衡", "file": "commands/overall-planning.md" },
+    { "name": "practice-cognition", "description": "实践认识：实践→认识→再实践", "file": "commands/practice-cognition.md" },
+    { "name": "simulation-validation-cycle", "description": "仿真验证：多场景+边界测试", "file": "commands/simulation-validation-cycle.md" },
+    { "name": "feedback-and-revision-loop", "description": "反馈修正：偏差→根因→修正", "file": "commands/feedback-and-revision-loop.md" },
+    { "name": "criticism-self-criticism", "description": "批评与自我批评：结构化审视", "file": "commands/criticism-self-criticism.md" },
+    { "name": "adaptive-robust-strategy", "description": "自适应策略：在不确定中保持最优", "file": "commands/adaptive-robust-strategy.md" },
+    { "name": "workflows", "description": "工作流：三条标准化跨环流水线", "file": "commands/workflows.md" }
+  ],
+
+  "skills": {
+    "directory": ".",
+    "description": "28 个方法论 skill，按认知环组织"
+  }
 }
