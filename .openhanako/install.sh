@@ -21,7 +21,7 @@ if [ ! -d "$HANAKO_SKILLS" ]; then
     mkdir -p "$HANAKO_SKILLS"
 fi
 
-# 28 个方法论 skill 清单
+# 27 个方法论 skill 清单（v3.2.0 — problem-domain-investigation 已合并入 investigation-first）
 SKILLS=(
     "arming-thought"
     "investigation-first"
@@ -49,7 +49,6 @@ SKILLS=(
     "feedback-and-revision-loop"
     "criticism-self-criticism"
     "adaptive-robust-strategy"
-    "problem-domain-investigation"
     "workflows"
 )
 
