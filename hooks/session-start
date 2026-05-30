@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PLUGIN_ROOT="$(dirname "$SCRIPT_DIR")"
+SKILL_FILE="$PLUGIN_ROOT/arming-thought/SKILL.md"
+
+if [ ! -f "$SKILL_FILE" ]; then
+    echo "ERROR: Missing skill file: $SKILL_FILE" >&2
+    exit 1
+fi
+
+ARMING_CONTENT="$(cat "$SKILL_FILE")"
+
+SESSION_CONTEXT="<QIUSHI_SE>
+已加载 qiushi-systems-engineering:arming-thought。请先遵守用户指令、项目约束和宿主平台规则，再在明确适用时把这份方法论作为补充的认知环路由与校验框架。
+
+$ARMING_CONTENT
+
+</QIUSHI_SE>"
+
+if [ -n "${CLAUDE_PLUGIN_ROOT:-}" ]; then
+    cat <<JSON
+{
+  "hookSpecificOutput": {
+    "hookEventName": "SessionStart",
+    "additionalContext": $(echo "$SESSION_CONTEXT" | python3 -c "import sys,json; print(json.dumps(sys.stdin.read()))" 2>/dev/null || echo "\"$SESSION_CONTEXT\"")
+  }
+}
+JSON
+elif [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
+    cat <<JSON
+{
+  "additional_context": $(echo "$SESSION_CONTEXT" | python3 -c "import sys,json; print(json.dumps(sys.stdin.read()))" 2>/dev/null || echo "\"$SESSION_CONTEXT\"")
+}
+JSON
+else
+    cat <<JSON
+{
+  "additional_context": $(echo "$SESSION_CONTEXT" | python3 -c "import sys,json; print(json.dumps(sys.stdin.read()))" 2>/dev/null || echo "\"$SESSION_CONTEXT\"")
+}
+JSON
+fi

@@ -1,0 +1,25 @@
+{
+  "name": "qiushi-systems-engineering",
+  "version": "3.2.0",
+  "description": "AI Agent 方法论 Skill 集合：实事求是 + 钱学森系统工程 → 七环认知闭环",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "validate": "powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File tests/validate.ps1",
+    "test": "powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File tests/validate.ps1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/qiushi-systems-engineering"
+  },
+  "keywords": [
+    "ai-agent",
+    "methodology",
+    "systems-engineering",
+    "skills",
+    "cognitive-loop",
+    "mao-zedong",
+    "qian-xuesen",
+    "engineering-cybernetics"
+  ]
+}
