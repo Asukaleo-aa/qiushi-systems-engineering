@@ -6,6 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [3.2.1] — 2026-05-31
+
+### Added
+- 多平台完整部署：6 大平台适配层（Claude Code / Cursor / OpenCode / Codex / OpenHanako / Reasonix）
+- `.claude-plugin/plugin.json` 完整声明 28 commands + SessionStart hook
+- `.cursor-plugin/plugin.json` 完整声明 28 commands + SessionStart hook
+- `.openhanako/` 专用安装脚本（`install.sh`）+ 集成文档
+- `formalization.md` 形式化层引用文档，含 Scenario 6 标定结果
+- 平台能力对比矩阵（`INSTALL.md`）
+
+### Changed
+- 增强 `.codex/INSTALL.md`、`.opencode/INSTALL.md`（28 skill 速查表 + 深度路由说明）
+- 重写 `INSTALL.md` 为统一多平台安装指南
+- 修正 `package.json` 仓库 URL
+- 清除已合并的 `problem-domain-investigation` 遗留引用
+
+### Linked
+- qiushi-formalization Scenario 6 标定完成：三组 σ_amp 最优参数 + 交叉验证 + 热力图
+
+---
+
 ## [3.2.0] — 2025-01
 
 ### Added
