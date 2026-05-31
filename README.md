@@ -116,6 +116,7 @@ flowchart TB
 |-------|--------|
 | `arming-thought` | 实事求是总原则 + 认知环路由器 |
 | `workflows` | 三条标准化跨环节工作流 |
+| `formalization-tools` | 耦合矩阵谱分析 + FSM 状态诊断 + 假稳态检测 + 参数标定 |
 
 ---
 
