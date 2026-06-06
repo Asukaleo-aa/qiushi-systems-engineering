@@ -1,9 +1,13 @@
 {
   "name": "qiushi-systems-engineering",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "description": "求是系统工程方法论：28 个 AI Agent 方法论 Skill，基于毛泽东哲学方法论与钱学森系统工程论，组织为七环认知闭环（感知→理解→建模→求解→执行→校验→修正）。每次会话启动自动注入实事求是总原则与认知环路由器。",
-  "author": "Asukaleo-aa",
+  "author": {
+    "name": "Asukaleo-aa",
+    "email": "asukaleo@github.com"
+  },
   "homepage": "https://github.com/Asukaleo-aa/qiushi-systems-engineering",
+  "repository": "https://github.com/Asukaleo-aa/qiushi-systems-engineering",
   "license": "MIT",
   "keywords": [
     "ai-agent",
@@ -13,170 +17,5 @@
     "qian-xuesen",
     "engineering-cybernetics",
     "mao-zedong"
-  ],
-  "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "startup|clear|compact",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/session-start\"",
-            "async": false
-          }
-        ]
-      }
-    ]
-  },
-  "commands": [
-    {
-      "name": "arming-thought",
-      "description": "武装思想入口：实事求是总原则 + 认知环路由器 + 六级深度判据 + 系统层次定位",
-      "file": "commands/arming-thought.md"
-    },
-    {
-      "name": "investigation-first",
-      "description": "调查研究：先调查再发言，列提纲逐项摸清，信息不充分时严禁下判断",
-      "file": "commands/investigation-first.md"
-    },
-    {
-      "name": "state-estimation",
-      "description": "状态估计：从噪声、矛盾、残缺数据中递推推断隐藏状态",
-      "file": "commands/state-estimation.md"
-    },
-    {
-      "name": "mass-line",
-      "description": "群众路线：收集→集中→返回→检验，整合多方意见",
-      "file": "commands/mass-line.md"
-    },
-    {
-      "name": "contradiction-analysis",
-      "description": "矛盾分析：识别矛盾→判定主次→区分性质→确定主攻方向",
-      "file": "commands/contradiction-analysis.md"
-    },
-    {
-      "name": "first-principles-analysis",
-      "description": "第一性原理分析：剥离假设到不可再分，从基本元素向上重建",
-      "file": "commands/first-principles-analysis.md"
-    },
-    {
-      "name": "historical-evolution-analysis",
-      "description": "历史演化分析：追溯因果链，分离偶然遗留与结构必然",
-      "file": "commands/historical-evolution-analysis.md"
-    },
-    {
-      "name": "systems-thinking-framework",
-      "description": "系统思维框架：第零步确定系统层次，六步建立系统世界观",
-      "file": "commands/systems-thinking-framework.md"
-    },
-    {
-      "name": "system-boundary-structuring",
-      "description": "系统边界结构：层次分解→组分规格→接口契约→六维边界检查",
-      "file": "commands/system-boundary-structuring.md"
-    },
-    {
-      "name": "quantitative-modeling-workflow",
-      "description": "定量建模：从定性假设到可计算模型的跃迁",
-      "file": "commands/quantitative-modeling-workflow.md"
-    },
-    {
-      "name": "meta-synthesis-engine",
-      "description": "综合集成引擎：定性判断 + 定量结果 + 经验 → 统一结论",
-      "file": "commands/meta-synthesis-engine.md"
-    },
-    {
-      "name": "constrained-optimization",
-      "description": "约束优化：在约束下求最优解，庞特里亚金极大值原理 + 贝尔曼动态规划",
-      "file": "commands/constrained-optimization.md"
-    },
-    {
-      "name": "hierarchical-decomposition-coordination",
-      "description": "递阶分解协调：大系统分解为自治子系统 + 协调层防全局恶化",
-      "file": "commands/hierarchical-decomposition-coordination.md"
-    },
-    {
-      "name": "duality-complementarity-analysis",
-      "description": "对偶互补分析：正向不通→构造对偶→求解→翻译回来",
-      "file": "commands/duality-complementarity-analysis.md"
-    },
-    {
-      "name": "perturbation-progressive-method",
-      "description": "摄动渐进方法：先解标称问题，再将差异视为小摄动逐步逼近",
-      "file": "commands/perturbation-progressive-method.md"
-    },
-    {
-      "name": "multi-representation-equivalence-transform",
-      "description": "多表述等价变换：时域↔频域↔状态空间↔几何 等价切换",
-      "file": "commands/multi-representation-equivalence-transform.md"
-    },
-    {
-      "name": "engineering-orchestration",
-      "description": "工程编排：WBS→关键路径→质量门→风险矩阵，编排为可执行任务序列",
-      "file": "commands/engineering-orchestration.md"
-    },
-    {
-      "name": "concentrate-forces",
-      "description": "集中兵力：多任务中确定唯一主攻方向，集中资源逐一歼灭",
-      "file": "commands/concentrate-forces.md"
-    },
-    {
-      "name": "spark-prairie-fire",
-      "description": "星火燎原：从零起步，找最小可行切入点建立根据地",
-      "file": "commands/spark-prairie-fire.md"
-    },
-    {
-      "name": "protracted-strategy",
-      "description": "持久战略：长期任务分三阶段（防御→相持→反攻），不追求速胜",
-      "file": "commands/protracted-strategy.md"
-    },
-    {
-      "name": "overall-planning",
-      "description": "统筹兼顾：多个目标相互制约时做动态平衡，十个指头弹钢琴",
-      "file": "commands/overall-planning.md"
-    },
-    {
-      "name": "practice-cognition",
-      "description": "实践认识论：实践→认识→再实践的螺旋上升，全环节方法论约束",
-      "file": "commands/practice-cognition.md"
-    },
-    {
-      "name": "simulation-validation-cycle",
-      "description": "仿真验证：多场景仿真 + 边界条件测试 + 压力测试",
-      "file": "commands/simulation-validation-cycle.md"
-    },
-    {
-      "name": "feedback-and-revision-loop",
-      "description": "反馈修正循环：偏差量化→五层根因追溯→三级修正→认知更新",
-      "file": "commands/feedback-and-revision-loop.md"
-    },
-    {
-      "name": "criticism-self-criticism",
-      "description": "批评与自我批评：结构化审视工作质量和思维过程，治病救人",
-      "file": "commands/criticism-self-criticism.md"
-    },
-    {
-      "name": "adaptive-robust-strategy",
-      "description": "自适应策略：自寻优→自行镇定→模型参考自适应，在不确定中保持最优",
-      "file": "commands/adaptive-robust-strategy.md"
-    },
-    {
-      "name": "workflows",
-      "description": "标准化工作流：三条跨环节流水线（新项目启动/复杂问题攻坚/方案迭代优化）",
-      "file": "commands/workflows.md"
-    },
-    {
-      "name": "formalization-tools",
-      "description": "形式化工具：耦合矩阵谱分析 + FSM状态诊断 + 假稳态检测 + 参数标定",
-      "file": "commands/formalization-tools.md"
-    }
-  ],
-  "skills": {
-    "directory": ".",
-    "description": "28 个方法论 skill 文件，每个子目录含 SKILL.md + frontmatter"
-  },
-  "permissions": {
-    "network": false,
-    "filesystem": "read",
-    "exec": false
-  }
+  ]
 }
