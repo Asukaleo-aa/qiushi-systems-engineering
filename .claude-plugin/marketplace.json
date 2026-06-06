@@ -5,14 +5,14 @@
   },
   "metadata": {
     "description": "实事求是 + 钱学森系统工程 → AI Agent 七环认知闭环方法论 Skill 体系 (27 技能)",
-    "version": "3.2.0"
+    "version": "3.2.2"
   },
   "plugins": [
     {
       "name": "qiushi-systems-engineering",
       "source": "./",
       "description": "合并 qiushi-skill + systems-engineering 的统一方法论技能包",
-      "version": "3.2.0",
+      "version": "3.2.2",
       "category": "methodology",
       "keywords": [
         "qiushi",

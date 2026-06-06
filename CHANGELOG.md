@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [3.2.2] — 2026-06-06
+
+### Fixed
+- plugin.json manifest schema 修正：`author` 字段从字符串改为 `{name, email}` 对象
+- 移除不适用于当前 Claude Code 版本的 `hooks`/`commands`/`skills`/`permissions` 顶层字段
+- `.cursor-plugin/plugin.json` 同步修正
+- Capricornus 上 git config email 从 `@users.noreply.github.com` 改为已验证邮箱
+
+### Added
+- `.claude-plugin/marketplace.json`（Claude Code 市场清单）
+
+---
+
 ## [3.2.1] — 2026-05-31
 
 ### Added
