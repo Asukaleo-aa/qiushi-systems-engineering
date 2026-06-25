@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [3.2.3] — 2026-06-14
+
+### Added
+- Trae 平台适配：28 个 skill 英文化重命名 + `skills.zip` 打包（`.trae/` 目录）
+- 每个 Trae skill 含 `references/` 子目录（认知环详解、深度判据、路由表等）
+
+---
+
 ## [3.2.2] — 2026-06-06
 
 ### Fixed
