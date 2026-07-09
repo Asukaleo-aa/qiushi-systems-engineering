@@ -1,0 +1,30 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "qiushi": {
+      "description": "求是系统工程方法论认知代理",
+      "model": "anthropic/claude-sonnet-4-5",
+      "tools": {
+        "skill": true
+      }
+    }
+  },
+  "plugin": [],
+  "permission": {
+    "skill": {
+      "arming-thought": "allow",
+      "contradiction-analysis": "allow",
+      "first-principles-analysis": "allow",
+      "investigation-first": "allow",
+      "state-estimation": "allow",
+      "practice-cognition": "allow",
+      "feedback-and-revision-loop": "allow",
+      "criticism-self-criticism": "allow",
+      "systems-thinking-framework": "allow",
+      "constrained-optimization": "allow",
+      "engineering-orchestration": "allow",
+      "formalization-tools": "allow",
+      "*": "ask"
+    }
+  }
+}
