@@ -1,4 +1,4 @@
-import { tool } from "@opencode-ai/plugin";
+import { tool } from "@kilocode/plugin";
 
 /**
  * 门控参数标定表 — 来自 Scenario 6 标定结果。

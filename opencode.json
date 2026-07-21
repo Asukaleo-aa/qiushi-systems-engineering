@@ -1,8 +1,9 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "default_agent": "qiushi",
   "agent": {
     "qiushi": {
-      "description": "求是系统工程方法论认知代理",
+      "description": "求是系统工程方法论认知代理——先看事实再下判断。强制遵循七环认知闭环。",
       "model": "anthropic/claude-sonnet-4-5",
       "tools": {
         "skill": true

@@ -1,4 +1,4 @@
-import { tool } from "@opencode-ai/plugin";
+import { tool } from "@kilocode/plugin";
 
 /**
  * 幂迭代法 — 计算矩阵的主导特征值和特征向量。

@@ -1,4 +1,4 @@
-import { tool } from "@opencode-ai/plugin";
+import { tool } from "@kilocode/plugin";
 
 /**
  * 认知环 FSM — 阈值常量
